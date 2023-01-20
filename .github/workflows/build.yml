@@ -6,12 +6,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: echo """deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal main restricted universe multiverse
-deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal-updates main restricted universe multiverse
-deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal-security main restricted universe multiverse
-deb [arch=amd64] http://us.archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse
-deb [arch=amd64] http://us.archive.ubuntu.com/ubuntu/ focal-updates main restricted universe multiverse
-deb [arch=amd64] http://security.ubuntu.com/ubuntu focal-security main restricted universe multiverse""" > sources.list
+      - run: | 
+          echo """deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal-updates main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports focal-security main restricted universe multiverse
+          deb [arch=amd64] http://us.archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse
+          deb [arch=amd64] http://us.archive.ubuntu.com/ubuntu/ focal-updates main restricted universe multiverse
+          deb [arch=amd64] http://security.ubuntu.com/ubuntu focal-security main restricted universe multiverse""" > sources.list
       - run: sudo mv sources.list /etc/apt/sources.list
       - run: sudo dpkg --add-architecture arm64
       - run: sudo apt-get update -y
