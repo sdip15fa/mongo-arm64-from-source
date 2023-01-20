@@ -1,9 +1,13 @@
-steps:
-- uses: actions/checkout@v3
+name: build
+on: push
+jobs:
+  build:
+    steps:
+      - uses: actions/checkout@v3
 
-- run: ./mongodb-arm64-from-source.sh
+      - run: ./mongodb-arm64-from-source.sh
 
-- uses: actions/upload-artifact@v3
-  with:
-    name: my-artifact
-    path: mongo/bin
+      - uses: actions/upload-artifact@v3
+        with:
+          name: mongodb
+          path: mongo/bin
