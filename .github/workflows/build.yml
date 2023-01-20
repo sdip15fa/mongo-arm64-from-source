@@ -21,7 +21,7 @@ jobs:
       - run: git clone -b v6.2 https://github.com/mongodb/mongo.git
       - run: cd mongo && python3 -m pip install --user -r etc/pip/compile-requirements.txt
       - run: |
-	  sed -i "s/env.ConfError(\"Failed to detect a supported target architecture\")/pass/g" mongo/SConstruct
+          sed -i "s/env.ConfError(\"Failed to detect a supported target architecture\")/pass/g" mongo/SConstruct
           sed -i "s/env.ConfError(\"Could not detect processor specified in TARGET_ARCH variable\")/pass/g"  mongo/SConstruct
           sed -i "s/env['TARGET_ARCH'] = detected_processor/env['TARGET_ARCH'] = 'aarch64'/g" mongo/SConstruct
       - run: cd mongo && python3 buildscripts/scons.py --ssl=off  CC=/usr/bin/aarch64-linux-gnu-gcc-10 CXX=/usr/bin/aarch64-linux-gnu-g++-10 TARGET_ARCH="aarch64" DESTDIR="bin" CCFLAGS="-march=armv8-a+crc -mtune=cortex-a72" install-servers
