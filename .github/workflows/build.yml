@@ -1,0 +1,9 @@
+steps:
+- uses: actions/checkout@v3
+
+- run: ./mongodb-arm64-from-source.sh
+
+- uses: actions/upload-artifact@v3
+  with:
+    name: my-artifact
+    path: mongo/bin
